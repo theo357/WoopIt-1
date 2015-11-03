@@ -1,14 +1,13 @@
 package gr.teicm.icd.data.entities;
 
 import java.util.Date;
-
+//model
 public class User {
 	
 	private Long userId;
 	private String userName;
 	private String userPass;
-	private Date userBirth;
-	
+
 	public Long getUserId(){
 		return userId;
 	}
@@ -32,12 +31,11 @@ public class User {
 	public void setUserPass(String userPass){
 		this.userPass = userPass;
 	}
-	
-	public Date getUserBirth(){
-		return userBirth;
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", userName=" + userName + ", userPass=" + userPass + "]";
 	}
 	
-	public void setUserBirth(Date userBirth){
-		this.userBirth = userBirth;
-	}
+	
 }
