@@ -10,5 +10,18 @@
 </head>
 <body>
 	<h1>Home</h1>
+	<form action="<spring:url value="/home"/>" method="post">
+	<table>
+		<tr><td colspan="2">Message: </td></tr>
+		<tr><td colspan="5"><textarea name="message" rows="10" cols="50"></textarea></td></tr>
+		<tr><td colspan="2"><input type="submit" name="submit" value="Whoop It!"></td></tr>
+	</table>
+	</form>
+	<br /><br /><br />
+	${message.content}
+	<!-- <c:forEach items="${messages}" var="message">
+		${message.content }
+		<br />
+	</c:forEach> -->
 </body>
 </html>
