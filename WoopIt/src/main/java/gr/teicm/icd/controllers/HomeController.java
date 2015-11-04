@@ -24,15 +24,23 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping(value="/home", method=RequestMethod.GET)
+	public String displayAllMessages(Model model)
+	{
+		//this.messages.add(newMessage);
+		//this.messages.add(msg);
+		//model.addAttribute("messages", messages);
+		return "home";
+	}
+	
 	@RequestMapping(value="/home", method=RequestMethod.POST)
 	public String postMessage(@RequestParam("message") String msg, Model model)
 	{
 		Message newMessage = new Message();
 		newMessage.setContent(msg);
-		model.addAttribute("message", newMessage);
+		//model.addAttribute("message", newMessage);
 		//this.messages.add(newMessage);
-		//this.messages.add(msg);
-		//model.addAttribute("messages", messages);
+		model.addAttribute("messages", newMessage);
 		return "home";
 	}
 

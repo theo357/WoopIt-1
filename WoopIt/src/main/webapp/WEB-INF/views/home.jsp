@@ -18,9 +18,9 @@
 	</table>
 	</form>
 	<br /><br /><br />
-	${message.content}
+	${messages.content}
 	<!-- <c:forEach items="${messages}" var="message">
-		${message.content }
+		${message.content}
 		<br />
 	</c:forEach> -->
 </body>
