@@ -12,11 +12,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import gr.teicm.icd.data.entities.Message;
 import gr.teicm.icd.data.entities.User;
+import gr.teicm.icd.data.services.MessageService;
 
 @Controller
 public class HomeController {
 	
 	//List<Message> messages = new ArrayList<>();
+	
+	@Autowired
+	private MessageService messageService;
 	
 	@RequestMapping("/home")
 	public String goHome()
@@ -36,8 +40,10 @@ public class HomeController {
 	@RequestMapping(value="/home", method=RequestMethod.POST)
 	public String postMessage(@RequestParam("message") String msg, Model model)
 	{
+		
 		Message newMessage = new Message();
 		newMessage.setContent(msg);
+		messageService.insertMessage(newMessage);
 		//model.addAttribute("message", newMessage);
 		//this.messages.add(newMessage);
 		model.addAttribute("messages", newMessage);

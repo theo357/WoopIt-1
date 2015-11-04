@@ -14,7 +14,8 @@ public class MessageService {
 	}
 	
 	public void insertMessage(Message message){
-		ApplicationContext appContext = new ClassPathXmlApplicationContext("Spring-module.xml");
-		MessageDAO messageDAO = (MessageDAO)appContext.getBean("messageDAO");
+		ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
+		MessageDAO messageDAO =  (MessageDAO) context.getBean("messageDAO");
+		messageDAO.insertMessage(message);
 	}
 }

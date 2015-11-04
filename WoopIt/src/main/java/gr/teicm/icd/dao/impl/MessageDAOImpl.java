@@ -2,13 +2,14 @@ package gr.teicm.icd.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import com.springsource.tcserver.serviceability.request.DataSource;
+import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
- 
+import java.util.ArrayList;
+import java.util.List;
+
 import gr.teicm.icd.data.entities.User;
 import gr.teicm.icd.dao.UserDAO;
-
 import gr.teicm.icd.dao.MessageDAO;
 import gr.teicm.icd.data.entities.Message;
 
@@ -20,16 +21,18 @@ public class MessageDAOImpl implements MessageDAO{
 		this.dataSource = dataSource;
 	}
 	
+	
+	//TODO MESSAGE_USER_ID must be fetched by Sender attribute of Message
 	public void insertMessage(Message message){
 		String sqlQuery = "INSERT INTO MESSAGES " + 
-						"(MESSAGE_BODY, MESSAGE_SENDER) " +
-						"VALUES (?, ?)";
+						"(MESSAGE_USER_ID, MESSAGE_BODY) " +
+						"VALUES(?, ?)";
 		Connection conn = null;
 		try {
 			conn = dataSource.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sqlQuery);
-			ps.setString(1,  message.getContent());
-			ps.setString(2, message.getSender().getUserName());
+			ps.setString(1, "19");
+			ps.setString(2, message.getContent());
 			ps.executeUpdate();
 			ps.close();
 		}
@@ -42,7 +45,7 @@ public class MessageDAOImpl implements MessageDAO{
 					conn.close();
 				}
 				catch(SQLException e){
-					
+					System.out.println("");
 				}
 			}
 		}
