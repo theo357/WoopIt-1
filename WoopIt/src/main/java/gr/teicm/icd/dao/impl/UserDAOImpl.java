@@ -20,15 +20,17 @@ public class UserDAOImpl implements UserDAO {
 	public void insert(User user){
 		
 		String sql = "INSERT INTO USERS " +
-				"(USER_NAME, USER_PASS) VALUES (?, ?)";
+				"(USER_NAME, USER_PASS, USER_EMAIL, USER_SEX, USER_COUNTRY) VALUES (?, ?, ?, ?, ?)";
 		Connection conn = null;
 		
 		try {
 			conn = dataSource.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
-			//ps.setLong(1, user.getUserId());
 			ps.setString(1, user.getUserName());
 			ps.setString(2, user.getUserPass());
+			ps.setString(3, user.getUserEmail());
+			ps.setString(4, user.getUserSex());
+			ps.setString(5, user.getUserCountry());
 			ps.executeUpdate();
 			ps.close();
 			
@@ -59,6 +61,9 @@ public class UserDAOImpl implements UserDAO {
 				user.setUserId(rs.getLong("USER_ID"));
 				user.setUserName(rs.getString("USER_NAME"));
 				user.setUserPass(rs.getString("USER_PASS"));
+				user.setUserEmail(rs.getString("USER_EMAIL"));
+				user.setUserSex(rs.getString("USER_SEX"));
+				user.setUserCountry(rs.getString("USER_COUNTRY"));
 			}
 			rs.close();
 			ps.close();
