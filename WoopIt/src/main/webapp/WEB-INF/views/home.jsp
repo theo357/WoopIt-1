@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Insert title here</title>
+	<title>Home</title>
 	<link rel="stylesheet" href="<spring:url value="/resources/css/home.css"/>" type="text/css"/>
 </head>
 <body>
@@ -18,7 +18,7 @@
 		<tr><td colspan="2"><input type="submit" name="submit" value="Whoop It!"></td></tr>
 	</table>
 	</form>
-	<br /><br /><br />
+	<br />
 	 <c:forEach items="${allMessages}" var="message">
 		${message.content}
 		<br />

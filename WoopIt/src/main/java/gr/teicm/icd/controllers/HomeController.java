@@ -40,13 +40,12 @@ public class HomeController {
 	@RequestMapping(value="/home", method=RequestMethod.POST)
 	public String postMessage(@RequestParam("message") String msg, Model model)
 	{
-		
 		Message newMessage = new Message();
 		newMessage.setContent(msg);
+		
 		this.messageService.insertMessage(newMessage);
-		//model.addAttribute("message", newMessage);
-		//this.messages.add(newMessage);
-		model.addAttribute("message", newMessage);
+		this.allMessages = this.messageService.getAllMessages();
+		model.addAttribute("allMessages", this.allMessages);
 		return "home";
 	}
 
