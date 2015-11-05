@@ -8,11 +8,11 @@ import gr.teicm.icd.data.entities.User;
 
 @Controller
 public class HomeController {
-	
+	/*
 	@RequestMapping("/home")
 	public String goHome()
 	{
 		return "home";
 	}
-
+*/
 }

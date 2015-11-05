@@ -9,6 +9,7 @@
 
 	<mvc:annotation-driven/>
 	<context:component-scan base-package="gr.teicm.icd.controllers"/>
+	<context:component-scan base-package="org.java.springsecurity" />
 	
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/"/>
@@ -16,4 +17,5 @@
 	</bean>
 	
 	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
+
 </beans>

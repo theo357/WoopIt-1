@@ -7,12 +7,9 @@
 	</configSuffixes>
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
-		<config>src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml</config>
-		<config>src/main/webapp/WEB-INF/applicationContext.xml</config>
-		<config>src/main/resources/Spring-Module.xml</config>
-		<config>src/main/resources/user/Spring-User.xml</config>
 	</configs>
 	<autoconfigs>
+		<config>src/main/webapp/WEB-INF/applicationContext.xml</config>
 	</autoconfigs>
 	<configSets>
 		<configSet>
@@ -20,9 +17,6 @@
 			<allowBeanDefinitionOverriding>true</allowBeanDefinitionOverriding>
 			<incomplete>false</incomplete>
 			<configs>
-				<config>src/main/webapp/WEB-INF/applicationContext.xml</config>
-				<config>src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml</config>
-				<config>src/main/resources/Spring-Module.xml</config>
 			</configs>
 			<profiles>
 			</profiles>
