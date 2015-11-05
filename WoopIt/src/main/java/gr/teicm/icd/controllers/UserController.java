@@ -28,7 +28,7 @@ public class UserController {
 		userService.insertUser(user);
 		return "register";
 	}
-	
+	/*
 	//Login User
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String loginUser()
@@ -41,7 +41,7 @@ public class UserController {
 	{
 		return "login";
 	}
-	
+
 	//Logout User
 	@RequestMapping("/logout")
 	public String logoutUser()
@@ -55,5 +55,5 @@ public class UserController {
 	{
 		return "profile";
 	}
-	
+		*/
 }

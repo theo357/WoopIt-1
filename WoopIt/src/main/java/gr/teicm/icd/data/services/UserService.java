@@ -6,7 +6,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import gr.teicm.icd.dao.UserDAO;
 import gr.teicm.icd.data.entities.User;
 
-//MOCK - 3 users
 public class UserService {
 	
 	public UserService(){
