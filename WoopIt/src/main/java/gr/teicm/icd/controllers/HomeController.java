@@ -17,7 +17,7 @@ import gr.teicm.icd.data.services.MessageService;
 @Controller
 public class HomeController {
 	
-	//List<Message> messages = new ArrayList<>();
+	private List<Message> allMessages = new ArrayList<>();
 	
 	@Autowired
 	private MessageService messageService;
@@ -31,9 +31,9 @@ public class HomeController {
 	@RequestMapping(value="/home", method=RequestMethod.GET)
 	public String displayAllMessages(Model model)
 	{
-		//this.messages.add(newMessage);
-		//this.messages.add(msg);
-		//model.addAttribute("messages", messages);
+		this.allMessages = this.messageService.getAllMessages();
+		//System.out.println(this.allMessages.get(0).getContent());
+		model.addAttribute("allMessages", this.allMessages);
 		return "home";
 	}
 	
@@ -43,10 +43,10 @@ public class HomeController {
 		
 		Message newMessage = new Message();
 		newMessage.setContent(msg);
-		messageService.insertMessage(newMessage);
+		this.messageService.insertMessage(newMessage);
 		//model.addAttribute("message", newMessage);
 		//this.messages.add(newMessage);
-		model.addAttribute("messages", newMessage);
+		model.addAttribute("message", newMessage);
 		return "home";
 	}
 
