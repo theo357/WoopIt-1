@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<import resource="Spring-database.xml" />
-	<import resource="Spring-user.xml" />
-	<import resource="Spring-Message.xml" />
+	<bean id="messageDAO" class="gr.teicm.icd.dao.impl.MessageDAOImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 </beans>

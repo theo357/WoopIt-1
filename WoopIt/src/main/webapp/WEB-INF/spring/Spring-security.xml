@@ -6,8 +6,8 @@
       
     <http auto-config="true" >
         <intercept-url pattern="/" access="permitAll" />
-        <intercept-url pattern="/home" access="permitAll" />
-        <intercept-url pattern="/admin**" access="hasRole('USER')" />
+        <intercept-url pattern="/home/**" access="hasRole('USER')" />
+        <intercept-url pattern="/admin/**" access="hasRole('USER')" />
         <form-login  login-page="/login" username-parameter="ssoId" password-parameter="password" authentication-failure-url="/Access_Denied" />
         <csrf/>
     </http>

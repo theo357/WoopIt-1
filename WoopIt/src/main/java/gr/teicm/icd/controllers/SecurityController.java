@@ -14,11 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class SecurityController {
-    @RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
-    public String homePage(ModelMap model) {
-        model.addAttribute("greeting", "Hi, Welcome to Woop It. ");
-        return "welcome";
-    }
  
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminPage(ModelMap model) {

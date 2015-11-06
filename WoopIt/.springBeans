@@ -9,6 +9,7 @@
 	<configs>
 		<config>src/main/webapp/WEB-INF/spring/Spring-security.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml</config>
+		<config>src/main/resources/Spring-Message.xml</config>
 	</configs>
 	<autoconfigs>
 		<config>src/main/webapp/WEB-INF/applicationContext.xml</config>

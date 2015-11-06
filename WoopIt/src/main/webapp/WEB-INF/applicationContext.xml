@@ -4,5 +4,6 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<bean id="userService" class="gr.teicm.icd.data.services.UserService"/>
+	<bean id="messageService" class="gr.teicm.icd.data.services.MessageService"/>
 	<import resource="classpath*:Spring-database.xml" />
 </beans>
