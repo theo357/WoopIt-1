@@ -7,8 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import gr.teicm.icd.data.entities.User;
-import gr.teicm.icd.dao.UserDAO;
 import gr.teicm.icd.dao.MessageDAO;
 import gr.teicm.icd.data.entities.Message;
 

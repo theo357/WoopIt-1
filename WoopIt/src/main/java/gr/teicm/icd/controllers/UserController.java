@@ -1,6 +1,12 @@
 package gr.teicm.icd.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,32 +34,19 @@ public class UserController {
 		userService.insertUser(user);
 		return "register";
 	}
-	/*
-	//Login User
-	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public String loginUser()
-	{
-		return "login";
-	}
 	
-	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String loginUserPOST(@ModelAttribute User user)
-	{
-		return "login";
-	}
-
-	//Logout User
-	@RequestMapping("/logout")
-	public String logoutUser()
-	{
-		return "logout";
-	}
-	
-	//Profile User
-	@RequestMapping("/profile")
-	public String profileUser()
-	{
-		return "profile";
-	}
-		*/
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String loginPage() {
+        return "login";
+    }
+ 
+    @RequestMapping(value="/logout", method = RequestMethod.GET)
+    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null){    
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        return "redirect:/user/login?logout";
+    }
+    
 }

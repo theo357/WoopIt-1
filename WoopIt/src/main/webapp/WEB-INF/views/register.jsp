@@ -1,152 +1,112 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="el">
-<head>
-    <title>Register</title>
-    <style type="text/css">
-    #wrapper {
-        width:450px;
-        margin:0 auto;
-        font-family:Verdana, sans-serif;
-    }
-    legend {
-        color:#0481b1;
-        font-size:16px;
-        padding:0 10px;
-        background:#fff;
-        -moz-border-radius:4px;
-        box-shadow: 0 1px 5px rgba(4, 129, 177, 0.5);
-        padding:5px 10px;
-        text-transform:uppercase;
-        font-family:Helvetica, sans-serif;
-        font-weight:bold;
-    }
-    fieldset {
-        border-radius:4px;
-        background: #fff; 
-        background: -moz-linear-gradient(#fff, #f9fdff);
-        background: -o-linear-gradient(#fff, #f9fdff);
-        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#f9fdff)); /
-        background: -webkit-linear-gradient(#fff, #f9fdff);
-        padding:20px;
-        border-color:rgba(4, 129, 177, 0.4);
-    }
-    input,
-    textarea {
-        color: #373737;
-        background: #fff;
-        border: 1px solid #CCCCCC;
-        color: #aaa;
-        font-size: 14px;
-        line-height: 1.2em;
-        margin-bottom:15px;
+    <title>WoopIt - Register</title>
 
-        -moz-border-radius:4px;
-        -webkit-border-radius:4px;
-        border-radius:4px;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset, 0 1px 0 rgba(255, 255, 255, 0.2);
-    }
-    input[type="text"],
-    input[type="password"]{
-        padding: 8px 6px;
-        height: 22px;
-        width:280px;
-    }
-    input[type="text"]:focus,
-    input[type="password"]:focus {
-        background:#f5fcfe;
-        text-indent: 0;
-        z-index: 1;
-        color: #373737;
-        -webkit-transition-duration: 400ms;
-        -webkit-transition-property: width, background;
-        -webkit-transition-timing-function: ease;
-        -moz-transition-duration: 400ms;
-        -moz-transition-property: width, background;
-        -moz-transition-timing-function: ease;
-        -o-transition-duration: 400ms;
-        -o-transition-property: width, background;
-        -o-transition-timing-function: ease;
-        width: 380px;
-        
-        border-color:#ccc;
-        box-shadow:0 0 5px rgba(4, 129, 177, 0.5);
-        opacity:0.6;
-    }
-    input[type="submit"]{
-        background: #222;
-        border: none;
-        text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
-        text-transform:uppercase;
-        color: #eee;
-        cursor: pointer;
-        font-size: 15px;
-        margin: 5px 0;
-        padding: 5px 22px;
-        -moz-border-radius: 4px;
-        border-radius: 4px;
-        -webkit-border-radius:4px;
-        -webkit-box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
-        -moz-box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
-        box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
-    }
-    textarea {
-        padding:3px;
-        width:96%;
-        height:100px;
-    }
-    textarea:focus {
-        background:#ebf8fd;
-        text-indent: 0;
-        z-index: 1;
-        color: #373737;
-        opacity:0.6;
-        box-shadow:0 0 5px rgba(4, 129, 177, 0.5);
-        border-color:#ccc;
-    }
-    .small {
-        line-height:14px;
-        font-size:12px;
-        color:#999898;
-        margin-bottom:3px;
-    }
-</style>
-</head>
-<body>
-    <div id="wrapper">
-        <form action="register" method="post">
-            <fieldset>
-                <legend>Sign up form</legend>
-				<div>
-                    <input type="text" name="userName" placeholder="User name"/>
-                </div>
-				<div>
-                    <input type="password" name="userPass" placeholder="Password"/>
-                </div>
-				<div>
-                    <input type="text" name="userEmail" placeholder="Email"/>
-                </div>
-                <div>              
-			   <input type="radio" name="userSex" value="male" checked>Male
-			   <br>
-			   <input type="radio" name="userSex" value="female">Female
-                </div>  
-				<div>
-				 <select name="userCountry">
-                    <option value="Greece">Greece</option>
-                    <option value="Germany">Germany</option>
-                    <option value="UK">United Kingdom</option>
-                    <option value="USA">USA</option>
-                 </select>
-				 <input type="submit" name="submit" value="Send"/>
-				 <input type="hidden" name="${_csrf.parameterName}"   value="${_csrf.token}" />
-                </div>				 
-             </fieldset>    
-        </form>
-    </div>
-</body>
+    <!-- Bootstrap core CSS -->
+    <link href="<c:url value='/resources/assets/css/bootstrap.css' />" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="<c:url value='/resources/assets/css/main.css' />" rel="stylesheet">
+    
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
+    
+    <script src="<c:url value='/resources/assets/js/jquery.min.js' />"></script>
+    <script src="<c:url value='/resources/assets/js/smoothscroll.js' />"></script>
+    
+
+  </head>
+
+  <body data-spy="scroll" data-offset="0" data-target="#navigation">
+
+	<jsp:include page="nav.jsp" />
+
+
+	<!-- INTRO WRAP -->
+	<div id="intro">
+		<div class="container">
+			<div class="row centered">
+				<h1>Sign up</h1>
+				<hr>
+				<br>
+				<div class="col-lg-4">
+				</div>
+				<div class="col-lg-6">
+					<c:url var="registerUrl" value="/user/register" />
+					<form class="form-horizontal" action="${register}" method="post">
+					  <div class="form-group">
+						<label for="userName" class="col-sm-2 control-label">Username:</label>
+						<div class="col-sm-6">
+						  <input type="text" class="form-control" id="userName" name="userName" placeholder="${userName}" required />
+						</div>
+					  </div>
+					  <div class="form-group">
+						<label for="userPass" class="col-sm-2 control-label">Password:</label>
+						<div class="col-sm-6">
+						  <input type="password" class="form-control" id="userPass" name="userPass" placeholder="${userPass}" required />
+						</div>
+					  </div>
+					    <div class="form-group">
+							<label for="userEmail" class="col-sm-2 control-label">Email:</label>
+							<div class="col-sm-6">
+							  <input type="email" class="form-control" id="userEmail" user="userEmail" placeholder="${userEmail}" required />
+							</div>
+					  </div>
+					  <div class="form-group">
+						<label for="radio-inline" class="col-sm-2 control-label">Gender:</label>
+						  <div class="col-sm-4">
+							  <label class="radio-inline">
+								  <input type="radio" name="userSex" id="userSex" value="Male"> Male
+								</label>
+								<label class="radio-inline">
+								  <input type="radio" name="userSex" id="userSex" value="Female"> Female
+								</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="userCountry" class="col-sm-2 control-label">Country:</label>
+							<div class="col-sm-4">
+								<select class="form-control" id="userCountry" name="userCountry">
+								  <option>Greece</option>
+								  <option>United Kingdom</option>
+								  <option>Germany</option>
+								  <option>USA</option>
+								</select>
+							</div>
+						</div>
+					  <div class="form-group">
+						<div class=" col-sm-8">
+							<br/>
+						  <button type="submit" class="btn btn-lg btn-block btn-success">Sign up</button>
+						</div>
+					  </div>
+					  <input type="hidden" name="${_csrf.parameterName}"   value="${_csrf.token}" />
+					</form>
+				</div>
+				<div class="col-lg-4">
+				</div>
+			</div>
+			<br>
+	    </div> <!--/ .container -->
+	</div><!--/ #introwrap -->
+	
+	<div id="c">
+		<div class="container">
+			<p>WoopIt Project</p>
+		</div>
+	</div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="<c:url value='/resources/assets/js/bootstrap.js' />"></script>
+  </body>
 </html>

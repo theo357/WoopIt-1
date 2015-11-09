@@ -21,6 +21,30 @@ public class HomeController {
 	@Autowired
 	private MessageService messageService;
 	
+	@RequestMapping("/")
+	public String goIndex()
+	{
+		return "welcome";
+	}
+	
+	@RequestMapping("/welcome")
+	public String goWelcome()
+	{
+		return "welcome";
+	}
+	
+	@RequestMapping("/howto")
+	public String goHowto()
+	{
+		return "howto";
+	}
+	
+	@RequestMapping("/support")
+	public String goSupport()
+	{
+		return "support";
+	}
+	
 	@RequestMapping("/home")
 	public String goHome()
 	{

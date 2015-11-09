@@ -4,14 +4,14 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
       
-    <http auto-config="true" >
+    <http auto-config="true">
         <intercept-url pattern="/" access="permitAll" />
         <intercept-url pattern="/home/**" access="hasRole('USER')" />
-        <intercept-url pattern="/admin/**" access="hasRole('USER')" />
-        <form-login  login-page="/login" username-parameter="ssoId" password-parameter="password" authentication-failure-url="/Access_Denied" />
+        <intercept-url pattern="/user/profile/**" access="hasRole('USER')" />
+        <form-login login-page="/user/login" username-parameter="ssoId" password-parameter="password" authentication-failure-url="/Access_Denied" />
         <csrf/>
     </http>
-  
+
     <authentication-manager >
         <authentication-provider>
 		<jdbc-user-service data-source-ref="dataSource"

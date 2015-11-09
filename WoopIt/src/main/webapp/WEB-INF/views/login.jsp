@@ -1,181 +1,127 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-<style>
-@import url(http://weloveiconfonts.com/api/?family=fontawesome);
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
-[class*="fontawesome-"]:before {
-  font-family: 'FontAwesome', sans-serif;
-}
+    <title>WoopIt - Login</title>
 
-* {
-  box-sizing: border-box;
-}
+    <!-- Bootstrap core CSS -->
+    <link href="<c:url value='/resources/assets/css/bootstrap.css'/>" rel="stylesheet">
 
-html {
-  height: 100%;
-}
+    <!-- Custom styles for this template -->
+    <link href="<c:url value='/resources/assets/css/main.css'/>" rel="stylesheet">
+    
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
+    
+    <script src="<c:url value='/resources/assets/js/jquery.min.js'/>"></script>
+    <script src="<c:url value='/resources/assets/js/smoothscroll.js'/>"></script>
+    
 
-body {
-  background-color: #2c3338;
-  color: #606468;
-  font: 400 0.875rem/1.5 "Open Sans", sans-serif;
-  margin: 0;
-  min-height: 100%;
-}
+  </head>
 
-a {
-  color: #eee;
-  outline: 0;
-  text-decoration: none;
-}
-a:focus, a:hover {
-  text-decoration: underline;
-}
+  <body data-spy="scroll" data-offset="0" data-target="#navigation">
 
-input {
-  border: 0;
-  color: inherit;
-  font: inherit;
-  margin: 0;
-  outline: 0;
-  padding: 0;
-  -webkit-transition: background-color .3s;
-          transition: background-color .3s;
-}
+	<jsp:include page="nav.jsp" />
 
-.site__container {
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  padding: 3rem 0;
-}
 
-.form input[type="password"], .form input[type="text"], .form input[type="submit"] {
-  width: 100%;
-}
-.form--login {
-  color: #606468;
-}
-.form--login label,
-.form--login input[type="text"],
-.form--login input[type="password"],
-.form--login input[type="submit"] {
-  border-radius: 0.25rem;
-  padding: 1rem;
-}
-.form--login label {
-  background-color: #363b41;
-  border-bottom-right-radius: 0;
-  border-top-right-radius: 0;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-}
-.form--login input[type="text"], .form--login input[type="password"] {
-  background-color: #3b4148;
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
-}
-.form--login input[type="text"]:focus, .form--login input[type="text"]:hover, .form--login input[type="password"]:focus, .form--login input[type="password"]:hover {
-  background-color: #434A52;
-}
-.form--login input[type="submit"] {
-  background-color: #ea4c88;
-  color: #eee;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-.form--login input[type="submit"]:focus, .form--login input[type="submit"]:hover {
-  background-color: #d44179;
-}
-.form__field {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin-bottom: 1rem;
-}
-.form__input {
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-}
+	<div id="headerwrap">
+	    <div class="container">
+	    	<div class="row centered">
+	    		<div class="col-lg-12">
+					<h1>Welcome To <b>WoopIt</b></h1>
+					<h3>Login and share your thoughts!</h3>
+					<br>
+	    		</div>
+	    		
+	    		<div class="col-lg-2">
+	    			<h5>What is it</h5>
+	    			<p>WoopIt connects you with other people around you. Cool isn't it?</p>
+	    		</div>
+				<div class="col-lg-1"></div>
+	    		<div class="col-lg-6">
+	    				
+					<div class="panel panel-default">
+						<div class="panel-body">
+						<c:url var="loginUrl" value="/login" />
+							<form class="form-horizontal" action="${loginUrl}" method="post">
+							  <div class="form-group">
+								<br/>
+								<label for="userName" class="col-sm-2 control-label">Username:</label>
+								<div class="col-sm-10">
+								  <input id="username" type="text" name="ssoId"  class="form-control" placeholder="Username">
+								</div>
+							  </div>
+							  <div class="form-group">
+								<label for="userPass" class="col-sm-2 control-label">Password:</label>
+								<div class="col-sm-10">
+								  <input id="password" type="password" name="password" class="form-control" placeholder="Password">
+								</div>
+							  </div>
+							  <div class="form-group">
+								<div class="col-sm-offset-2 col-sm-4">
+								  <div class="checkbox">
+									<label>
+									  <input type="checkbox">Remember me
+									</label>
+								  </div>
+								</div>
+							  </div>
+							  <div class="form-group">
+								<div class="col-sm-offset-2 col-sm-8">
+								  <button type="submit" class="btn btn-lg btn-default">Sign in</button>
+								  <a class="btn btn-lg btn-success" href="<c:url value='/user/register'/>" role="button">Sign up</a>
+								</div>
+							  </div>
+							  <input type="hidden" name="${_csrf.parameterName}"   value="${_csrf.token}" />
+						</form>
+					</div>
+				</div>
+					
+	    		</div>
+	    		<div class="col-lg-2">
+	    			<br>
+	    			<img class="hidden-xs hidden-sm hidden-md" src="<c:url value='/resources/assets/img/arrow2.png' />">
+	    			<h5>Join WoopIt</h5>
+	    			<p>Be a member so you can express your feelings to everyone.</p>
+	    		</div>
+	    	</div>
+	    </div> <!--/ .container -->
+	</div><!--/ #headerwrap -->
 
-.align {
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-      -ms-flex-direction: row;
-          flex-direction: row;
-}
 
-.hidden {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
-}
+	<!-- INTRO WRAP -->
+	<div id="intro">
+		<div class="container">
+			<div class="row centered">
+				<h1></h1>
+				<br>
+				<br>
+				<div class="col-lg-4">
+				</div>
+				<div class="col-lg-4">
+				</div>
+				<div class="col-lg-4">
+				</div>
+			</div>
+			<br><br><br><br><br><br><br>
+	    </div> <!--/ .container -->
+	</div><!--/ #introwrap -->
+	
+	<div id="c">
+		<div class="container">
+			<p>WoopIt Project</p>
+		</div>
+	</div>
 
-.text--center {
-  text-align: center;
-}
 
-.grid__container {
-  margin: 0 auto;
-  max-width: 20rem;
-  width: 90%;
-}
-</style>
-</head>
-<body class="align">
-
-  <div class="site__container">
-
-    <div class="grid__container">
-	<c:url var="loginUrl" value="/login" />
-      <form action="${loginUrl}" method="post" class="form form--login">
-
-        <div class="form__field">
-          <label class="fontawesome-user" for="login__username"><span class="hidden">Username</span></label>
-          <input id="username" type="text" name="ssoId" class="form__input" placeholder="User name" required>
-        </div>
-
-        <div class="form__field">
-          <label class="fontawesome-lock" for="login__password"><span class="hidden">Password</span></label>
-          <input id="password" type="password" name="password" class="form__input" placeholder="Password" required>
-        </div>
-
-        <div class="form__field">
-          <input type="submit" value="Login">
-        </div>
-		<input type="hidden" name="${_csrf.parameterName}"   value="${_csrf.token}" />
-      </form>
-
-      <p class="text--center"><center><h2><font color="red">Still not a member?</font></h2></center> <a href="Registration.html"><center><h1>Register</h1></center></a></p>
-
-    </div>
-
-  </div>
-
-</body>
-</body>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="<c:url value='/resources/assets/js/bootstrap.js'/>"></script>
+  </body>
 </html>
