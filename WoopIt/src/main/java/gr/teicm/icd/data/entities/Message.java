@@ -1,25 +1,30 @@
 package gr.teicm.icd.data.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="MESSAGE")
 public class Message {
 	
-	private String content;
+	private String body;
 	private String time;
 	private User sender;
 	
 	public Message(){
-		this.content = "";
+		this.body = "";
 		this.time = "";
 		this.sender = new User();
 	}
 
-	public Message(String content, String time, User sender) {
-		this.content = content;
+	public Message(String body, String time, User sender) {
+		this.body = body;
 		this.time = time;
 		this.sender = sender;
 	}
 
-	public String getContent() {
-		return content;
+	public String getBody() {
+		return body;
 	}
 
 	public String getTime(){
@@ -30,8 +35,8 @@ public class Message {
 		return sender;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setBody(String body) {
+		this.body = body;
 	}
 
 	public void setTime(String time){

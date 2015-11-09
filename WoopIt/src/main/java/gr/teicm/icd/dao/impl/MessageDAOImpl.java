@@ -3,18 +3,51 @@ package gr.teicm.icd.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import javax.sql.DataSource;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import gr.teicm.icd.data.entities.User;
-import gr.teicm.icd.dao.UserDAO;
-import gr.teicm.icd.dao.MessageDAO;
-import gr.teicm.icd.data.entities.Message;
 
+import org.apache.log4j.spi.*;
+//import org.apache.log4j.spi.LoggerFactory;
+import org.hibernate.*;
+import org.hibernate.annotations.common.util.impl.LoggerFactory;
+import org.hibernate.*;
+import org.slf4j.*;
+import org.springframework.stereotype.*;
+
+
+import java.sql.*;
+import java.util.*;
+import gr.teicm.icd.dao.*;
+import gr.teicm.icd.data.entities.*;
+
+@Repository
 public class MessageDAOImpl implements MessageDAO{
 
-	private DataSource dataSource;
+	
+	private static final Logger logger = LoggerFactory.getLogger(UserDAOImpl.class);
+	private SessionFactory sessionFactory;
+	
+	public void setSessionFactory(SessionFactory sf){
+		this.sessionFactory = sf;
+	}
+	
+	@Override
+	public void insertMessage(Message message) {
+        Session session = this.sessionFactory.getCurrentSession();
+        session.persist(message);
+        logger.info("Message saved successfully, Message Details="+message);
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Message> listMessages() {
+        Session session = this.sessionFactory.getCurrentSession();
+        List<Message> messagesList = session.createQuery("from Message").list();
+        for(Message msg : messagesList){
+            logger.info("Message List::"+msg);
+        }
+        return messagesList;
+	}
+	/*private DataSource dataSource;
 	
 	public void setDataSource(DataSource dataSource){
 		this.dataSource = dataSource;
@@ -92,4 +125,6 @@ public class MessageDAOImpl implements MessageDAO{
 			PreparedStatement ps = conn.prepareStatement(sqlQuery1);
 		}
 	}*/
+
+
 }

@@ -1,114 +1,77 @@
 package gr.teicm.icd.dao.impl;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import javax.sql.DataSource;
- 
-import gr.teicm.icd.data.entities.User;
-import gr.teicm.icd.dao.UserDAO;
+//import org.hibernate.annotations.common.util.impl.LoggerFactory;
+import java.util.List;
 
+import org.apache.log4j.spi.LoggerFactory;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+//import org.hibernate.bytecode.buildtime.spi.Logger;
+import org.slf4j.Logger;
+import org.springframework.stereotype.Repository;
+
+import gr.teicm.icd.dao.UserDAO;
+import gr.teicm.icd.data.entities.User;
+
+@Repository
 public class UserDAOImpl implements UserDAO {
+
+	private static final Logger logger = LoggerFactory.getLogger(UserDAOImpl.class);
 	
-	private DataSource dataSource;
+	private SessionFactory sessionFactory;
 	
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
+	public void setSessionFactory(SessionFactory sf){
+		this.sessionFactory = sf;
 	}
 	
-	public void insert(User user){
-		
-		String sql = "INSERT INTO USERS " +
-				"(USER_NAME, USER_PASS, USER_EMAIL, USER_SEX, USER_COUNTRY) VALUES (?, ?, ?, ?, ?)";
-		Connection conn = null;
-		
-		try {
-			conn = dataSource.getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, user.getUserName());
-			ps.setString(2, user.getUserPass());
-			ps.setString(3, user.getUserEmail());
-			ps.setString(4, user.getUserSex());
-			ps.setString(5, user.getUserCountry());
-			ps.executeUpdate();
-			ps.close();
-			
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-			
-		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {}
-			}
-		}
+	@Override
+	public void insertUser(User user) {
+        Session session = this.sessionFactory.getCurrentSession();
+        session.persist(user);
+        logger.info("User saved successfully, User Details="+user);
 	}
-	
-	public User findByUserId(Long userId){
-		
-		String sql = "SELECT * FROM USERS WHERE USER_ID = ?";
-		Connection conn = null;
-		
-		try {
-			conn = dataSource.getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setLong(1, userId);
-			User user = new User();
-			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
-				user.setUserId(rs.getLong("USER_ID"));
-				user.setUserName(rs.getString("USER_NAME"));
-				user.setUserPass(rs.getString("USER_PASS"));
-				user.setUserEmail(rs.getString("USER_EMAIL"));
-				user.setUserSex(rs.getString("USER_SEX"));
-				user.setUserCountry(rs.getString("USER_COUNTRY"));
-			}
-			rs.close();
-			ps.close();
-			return user;
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} finally {
-			if (conn != null) {
-				try {
-				conn.close();
-				} 
-			catch (SQLException e) {}
-			}
-		}
+
+	@Override
+	public User getUserById(Long id) {
+        Session session = this.sessionFactory.getCurrentSession();      
+        User usr = (User) session.load(User.class, new Long(id));
+        logger.info("User loaded successfully, User details="+usr);
+        return usr;
 	}
-	
-	public Boolean checkIfUserNameExist(String userName){
-		
-		String sql = "SELECT * FROM USERS WHERE USER_NAME = ?";
-		Connection conn = null;
-		
-		try {
-			conn = dataSource.getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, userName);
-			ResultSet rs = ps.executeQuery();
-			if (rs.first()) {
-				rs.close();
-				ps.close();
-				return true;
-			}
-			else{
-				rs.close();
-				ps.close();
-				return false;
-			}
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} finally {
-			if (conn != null) {
-				try {
-				conn.close();
-				} 
-			catch (SQLException e) {}
-			}
-		}
+
+	@Override
+	public Boolean checkIfUserNameExist(String userName) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	@Override
+	public void updateUser(User user) {
+        Session session = this.sessionFactory.getCurrentSession();
+        session.update(user);
+        logger.info("User updated successfully, User Details="+user);	
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> listUsers() {
+        Session session = this.sessionFactory.getCurrentSession();
+        List<User> usersList = session.createQuery("from User").list();
+        for(User usr : usersList){
+            logger.info("User List::"+usr);
+        }
+        return usersList;
+	}
+
+	@Override
+	public void removeUser(Long id) {
+        Session session = this.sessionFactory.getCurrentSession();
+        User usr = (User) session.load(User.class, new Long(id));
+        if(null != usr){
+            session.delete(usr);
+        }
+        logger.info("User deleted successfully, user details="+usr);
+	}
+
+
 }

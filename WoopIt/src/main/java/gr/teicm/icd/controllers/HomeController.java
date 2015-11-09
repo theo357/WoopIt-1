@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +19,13 @@ public class HomeController {
 	
 	private List<Message> allMessages = new ArrayList<>();
 	
-	@Autowired
 	private MessageService messageService;
+	
+    @Autowired(required=true)
+    @Qualifier(value="messageService")
+    public void setMessageService(MessageService ms){
+        this.messageService = ms;
+    }
 	
 	@RequestMapping("/home")
 	public String goHome()
@@ -30,7 +36,7 @@ public class HomeController {
 	@RequestMapping(value="/home", method=RequestMethod.GET)
 	public String displayAllMessages(Model model)
 	{
-		this.allMessages = this.messageService.getAllMessages();
+		this.allMessages = this.messageService.listMessages();
 		//System.out.println(this.allMessages.get(0).getContent());
 		model.addAttribute("allMessages", this.allMessages);
 		return "home";
@@ -40,10 +46,10 @@ public class HomeController {
 	public String postMessage(@RequestParam("message") String msg, Model model)
 	{
 		Message newMessage = new Message();
-		newMessage.setContent(msg);
+		newMessage.setBody(msg);
 		
 		this.messageService.insertMessage(newMessage);
-		this.allMessages = this.messageService.getAllMessages();
+		this.allMessages = this.messageService.listMessages();
 		model.addAttribute("allMessages", this.allMessages);
 		return "home";
 	}

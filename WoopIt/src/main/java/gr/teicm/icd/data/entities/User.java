@@ -1,18 +1,30 @@
 package gr.teicm.icd.data.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="USER")
 public class User {
 	
-	private Long userId;
+	@Id
+	@Column(name="id")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private long userId;
 	private String userName;
 	private String userPass;
 	private String userEmail;
 	private String userSex;
 	private String userCountry;
 	
-	public Long getUserId(){
+	public long getUserId(){
 		return userId;
 	}
-	public void setUserId(Long userId){
+	public void setUserId(int userId){
 		this.userId = userId;
 	}
 	

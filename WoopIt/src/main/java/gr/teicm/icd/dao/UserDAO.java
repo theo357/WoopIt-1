@@ -1,12 +1,20 @@
 package gr.teicm.icd.dao;
 
-import gr.teicm.icd.data.entities.User;
+import java.util.*;
+
+import gr.teicm.icd.data.entities.*;
 
 public interface UserDAO {
     
-    public void insert(User user);
+    public void insertUser(User user);
      
-    public User findByUserId(Long userId);
+    public User getUserById(Long id);
     
     public Boolean checkIfUserNameExist(String userName);
+    
+    public void updateUser(User user);
+    
+    public List<User> listUsers();
+    
+    public void removeUser(Long id);
 }
